@@ -457,3 +457,10 @@ class Blockchain(object):
             return False
         except Exception as e:
             return False
+    def get_users(self):
+        f=open(self.public_data)
+        data=f.read().split("; ")
+        f.close()
+        if len(data)>0:
+            data.pop(0)
+        return data
