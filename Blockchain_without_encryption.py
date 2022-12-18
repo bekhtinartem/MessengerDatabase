@@ -85,6 +85,8 @@ class Blockchain(object):
         return hashlib.sha256((password+pw_hash).encode('utf-8')).hexdigest()
 
     def send_message(self, login_from, login_to, message1, token):
+        if(not(self.is_exist(login_from, token))):
+            return None
         from_hash=hashlib.sha256(login_from.encode('utf-8')).hexdigest()
         to_hash=hashlib.sha256(login_to.encode('utf-8')).hexdigest()
         token=hashlib.sha256((from_hash+to_hash).encode('utf-8')).hexdigest()
@@ -188,6 +190,8 @@ class Blockchain(object):
             return user["token"]
         return None
     def get_messages(self, user1, user2, token, count): #count - count messages for getting, token - token of first user
+        if(not(self.is_exist(user1, token))):
+            return None
         copy_token=token
         user1=hashlib.sha256(user1.encode('utf-8')).hexdigest()
         user2=hashlib.sha256(user2.encode('utf-8')).hexdigest()
@@ -248,6 +252,8 @@ class Blockchain(object):
             print(e)
             return None
     def get_connections(self, login, token):
+        if(not(self.is_exist(login, token))):
+            return None
         from_hash=hashlib.sha256(login.encode('utf-8')).hexdigest()
         f = open(self.connections +"/"+ from_hash + ".block")
         conn = f.read()
