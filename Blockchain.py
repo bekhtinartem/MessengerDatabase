@@ -105,7 +105,7 @@ class Blockchain(object):
         
         return hashlib.sha256((password+pw_hash).encode('utf-8')).hexdigest()
 
-    def send_message(self, login_from, login_to, message1, token):# will work only with right token
+    def send_message(self, login_from, login_to, message1, token):
         from_hash=hashlib.sha256(login_from.encode('utf-8')).hexdigest()
         to_hash=hashlib.sha256(login_to.encode('utf-8')).hexdigest()
         token=hashlib.sha256((from_hash+to_hash).encode('utf-8')).hexdigest()
